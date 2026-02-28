@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Restaurant Canada Best — Nasi Lemak & More | Parc-Extension, Montréal</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --spice: #C8401A;
+    --gold: #D4A84B;
+    --cream: #F7F0E6;
+    --dark: #1A1008;
+    --leaf: #3D6B47;
+    --warm: #8B4A2B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--dark);
+    font-family: 'DM Sans', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    background: var(--dark);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background: 
+      radial-gradient(ellipse at 20% 50%, rgba(200,64,26,0.25) 0%, transparent 60%),
+      radial-gradient(ellipse at 80% 30%, rgba(212,168,75,0.2) 0%, transparent 55%),
+      radial-gradient(ellipse at 50% 80%, rgba(61,107,71,0.2) 0%, transparent 50%);
+  }
+
+  .hero-pattern {
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23D4A84B' fill-opacity='0.06'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  .badge {
+    display: inline-block;
+    background: rgba(212,168,75,0.15);
+    border: 1px solid rgba(212,168,75,0.4);
+    color: var(--gold);
+    font-size: 0.7rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.4em 1.2em;
+    border-radius: 2px;
+    margin-bottom: 1.5rem;
+    animation: fadeDown 0.8s ease forwards;
+    opacity: 0;
+  }
+
+  .hero h1 {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(3rem, 8vw, 6rem);
+    color: var(--cream);
+    line-height: 1.05;
+    animation: fadeUp 1s ease 0.2s forwards;
+    opacity: 0;
+  }
+
+  .hero h1 em {
+    color: var(--gold);
+    font-style: italic;
+  }
+
+  .hero-sub {
+    margin-top: 1.2rem;
+    font-size: 1rem;
+    color: rgba(247,240,230,0.6);
+    letter-spacing: 0.05em;
+    animation: fadeUp 1s ease 0.4s forwards;
+    opacity: 0;
+  }
+
+  .hero-flags {
+    display: flex;
+    gap: 0.5rem;
+    justify-content: center;
+    margin-top: 1.5rem;
+    animation: fadeUp 1s ease 0.5s forwards;
+    opacity: 0;
+  }
+
+  .flag-pill {
+    background: rgba(255,255,255,0.07);
+    border: 1px solid rgba(255,255,255,0.12);
+    color: rgba(247,240,230,0.7);
+    font-size: 0.75rem;
+    padding: 0.3em 0.9em;
+    border-radius: 20px;
+    letter-spacing: 0.05em;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: fadeUp 1s ease 0.6s forwards;
+    opacity: 0;
+  }
+
+  .btn-primary {
+    background: var(--spice);
+    color: white;
+    padding: 0.85rem 2rem;
+    border: none;
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+  }
+
+  .btn-primary:hover { background: #a83415; transform: translateY(-1px); }
+
+  .btn-outline {
+    background: transparent;
+    color: var(--cream);
+    padding: 0.85rem 2rem;
+    border: 1px solid rgba(247,240,230,0.3);
+    border-radius: 4px;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 0.85rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    cursor: pointer;
+    text-decoration: none;
+    transition: border-color 0.2s, color 0.2s;
+  }
+
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    color: rgba(247,240,230,0.4);
+    font-size: 0.7rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    animation: fadeUp 1s ease 1s forwards;
+    opacity: 0;
+  }
+
+  .scroll-hint::after {
+    content: '';
+    display: block;
+    width: 1px;
+    height: 40px;
+    background: linear-gradient(to bottom, rgba(247,240,230,0.4), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    padding: 1.2rem 2rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: rgba(26,16,8,0.85);
+    backdrop-filter: blur(12px);
+    border-bottom: 1px solid rgba(212,168,75,0.1);
+  }
+
+  .nav-logo {
+    font-family: 'Playfair Display', serif;
+    font-size: 1.1rem;
+    color: var(--cream);
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(247,240,230,0.6);
+    text-decoration: none;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--gold); }
+
+  /* STARS */
+  .stars-bar {
+    background: var(--dark);
+    padding: 1rem 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.8rem;
+    border-bottom: 1px solid rgba(212,168,75,0.15);
+  }
+
+  .stars { color: var(--gold); font-size: 1.1rem; letter-spacing: 0.1em; }
+
+  .stars-text {
+    color: rgba(247,240,230,0.5);
+    font-size: 0.78rem;
+    letter-spacing: 0.04em;
+  }
+
+  .stars-text strong { color: var(--cream); }
+
+  /* SECTION BASE */
+  section { padding: 6rem 2rem; max-width: 1100px; margin: 0 auto; }
+
+  .section-label {
+    font-size: 0.7rem;
+    letter-spacing: 0.22em;
+    text-transform: uppercase;
+    color: var(--spice);
+    margin-bottom: 0.8rem;
+  }
+
+  .section-title {
+    font-family: 'Playfair Display', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
+    line-height: 1.15;
+    color: var(--dark);
+  }
+
+  /* ABOUT */
+  .about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 5rem;
+    align-items: center;
+    margin-top: 3rem;
+  }
+
+  .about-img-placeholder {
+    aspect-ratio: 4/5;
+    background: linear-gradient(135deg, #3D6B47 0%, #1A3D22 40%, #8B4A2B 100%);
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .about-img-placeholder::after {
+    content: '🍛';
+    font-size: 5rem;
+    filter: drop-shadow(0 4px 20px rgba(0,0,0,0.4));
+  }
+
+  .about-img-placeholder::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: url("data:image/svg+xml,%3Csvg width='100' height='100' viewBox='0 0 100 100' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M11 18c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm48 25c3.866 0 7-3.134 7-7s-3.134-7-7-7-7 3.134-7 7 3.134 7 7 7zm-43-7c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3zm63 31c1.657 0 3-1.343 3-3s-1.343-3-3-3-3 1.343-3 3 1.343 3 3 3z' fill='rgba(255,255,255,0.05)' fill-rule='evenodd'/%3E%3C/svg%3E");
+    opacity: 0.4;
+  }
+
+  .rating-badge {
+    position: absolute;
+    top: 1.5rem;
+    right: 1.5rem;
+    background: var(--dark);
+    border: 1px solid rgba(212,168,75,0.4);
+    color: var(--cream);
+    padding: 0.6rem 1rem;
+    border-radius: 4px;
+    text-align: center;
+    font-family: 'Playfair Display', serif;
+  }
+
+  .rating-badge .num { font-size: 1.6rem; display: block; color: var(--gold); }
+  .rating-badge .lbl { font-size: 0.6rem; letter-spacing: 0.1em; text-transform: uppercase; opacity: 0.6; }
+
+  .about-body {
+    font-size: 1rem;
+    line-height: 1.8;
+    color: #5a4a3a;
+    margin-top: 1rem;
+  }
+
+  .about-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 2rem;
+  }
+
+  .detail-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 1rem;
+    font-size: 0.85rem;
+  }
+
+  .detail-icon { color: var(--spice); font-size: 1rem; margin-top: 0.1rem; }
+  .detail-info strong { display: block; color: var(--dark); font-weight: 500; }
+  .detail-info span { color: #8a7060; font-size: 0.8rem; }
+
+  /* MENU */
+  .menu-section { background: var(--dark); padding: 6rem 2rem; }
+  .menu-inner { max-width: 1100px; margin: 0 auto; }
+
+  .menu-section .section-label { color: var(--gold); }
+  .menu-section .section-title { color: var(--cream); }
+
+  .menu-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .menu-card {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,168,75,0.12);
+    border-radius: 8px;
+    padding: 1.8rem;
+    transition: border-color 0.3s, transform 0.2s;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .menu-card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--spice), var(--gold));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .menu-card:hover { border-color: rgba(212,168,75,0.3); transform: translateY(-3px); }
+  .menu-card:hover::before { transform: scaleX(1); }
+
+  .menu-emoji { font-size: 2rem; margin-bottom: 1rem; display: block; }
+  .menu-name { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--cream); margin-bottom: 0.5rem; }
+  .menu-desc { font-size: 0.82rem; color: rgba(247,240,230,0.5); line-height: 1.65; }
+  .menu-origin { margin-top: 1rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--gold); }
+
+  /* REVIEWS */
+  .reviews-section { background: #F2E8DA; padding: 6rem 2rem; }
+  .reviews-inner { max-width: 1100px; margin: 0 auto; }
+
+  .review-cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 3rem;
+  }
+
+  .review-card {
+    background: white;
+    border-radius: 8px;
+    padding: 1.8rem;
+    box-shadow: 0 2px 20px rgba(0,0,0,0.05);
+  }
+
+  .review-stars { color: var(--gold); font-size: 0.9rem; margin-bottom: 1rem; }
+  .review-text { font-size: 0.85rem; line-height: 1.75; color: #5a4a3a; font-style: italic; }
+  .review-author { margin-top: 1.2rem; font-size: 0.75rem; font-weight: 500; color: var(--warm); letter-spacing: 0.04em; }
+
+  /* HOURS */
+  .hours-section { max-width: 700px; margin: 0 auto; padding: 6rem 2rem; text-align: center; }
+  .hours-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0.7rem; margin-top: 3rem; text-align: left; }
+  .hours-row { display: flex; justify-content: space-between; padding: 0.7rem 1rem; background: white; border-radius: 4px; font-size: 0.85rem; }
+  .hours-day { font-weight: 500; color: var(--dark); }
+  .hours-time { color: #8a7060; }
+  .hours-closed { color: var(--spice); }
+
+  /* FIND US */
+  .findus-section {
+    background: var(--dark);
+    padding: 5rem 2rem;
+    text-align: center;
+  }
+
+  .findus-section .section-label { color: var(--gold); }
+  .findus-section .section-title { color: var(--cream); margin-bottom: 3rem; }
+
+  .findus-inner { max-width: 700px; margin: 0 auto; }
+
+  .contact-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.5rem;
+    margin-top: 2rem;
+  }
+
+  .contact-item {
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(212,168,75,0.12);
+    border-radius: 8px;
+    padding: 1.5rem;
+    text-align: center;
+  }
+
+  .contact-icon { font-size: 1.5rem; margin-bottom: 0.5rem; }
+  .contact-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.3rem; }
+  .contact-value { font-size: 0.85rem; color: var(--cream); }
+
+  /* FOOTER */
+  footer {
+    background: #0d0804;
+    padding: 2rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: rgba(247,240,230,0.25);
+    letter-spacing: 0.05em;
+  }
+
+  /* ANIMATIONS */
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes fadeDown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes scrollPulse {
+    0%, 100% { opacity: 0.4; }
+    50% { opacity: 0.9; }
+  }
+
+  @media (max-width: 768px) {
+    .about-grid, .menu-grid, .review-cards, .contact-grid { grid-template-columns: 1fr; }
+    .hours-grid { grid-template-columns: 1fr; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="nav-logo" href="#">Canada <span>Best</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#hours">Hours</a></li>
+    <li><a href="#visit">Visit Us</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-pattern"></div>
+  <div style="position:relative; z-index:1;">
+    <div class="badge">★ 4.8 / 5 · Parc-Extension · Montréal</div>
+    <h1>Where <em>Nasi Lemak</em><br>Comes to Life</h1>
+    <p class="hero-sub">Authentic Malaysian & Sri Lankan cuisine, made with love.</p>
+    <div class="hero-flags">
+      <span class="flag-pill">🇲🇾 Malaysian</span>
+      <span class="flag-pill">🇱🇰 Sri Lankan</span>
+      <span class="flag-pill">🇮🇳 South Indian</span>
+    </div>
+    <div class="hero-cta">
+      <a href="#menu" class="btn-primary">See Our Dishes</a>
+      <a href="#visit" class="btn-outline">Find Us</a>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll</div>
+</div>
+
+<div class="stars-bar">
+  <div class="stars">★★★★★</div>
+  <div class="stars-text"><strong>4.8 stars</strong> · Over 640 reviews on Google</div>
+</div>
+
+<div id="about">
+  <section>
+    <div class="section-label">Our Story</div>
+    <div class="about-grid">
+      <div class="about-img-placeholder">
+        <div class="rating-badge">
+          <span class="num">4.8</span>
+          <span class="lbl">Google Rating</span>
+        </div>
+      </div>
+      <div>
+        <h2 class="section-title">A Hidden Gem<br>in Parc-Extension</h2>
+        <p class="about-body">
+          Run by a husband and wife team with a deep passion for the flavours of Malaysia and Sri Lanka, Restaurant Canada Best is a neighbourhood treasure. Every dish is made fresh, with carefully sourced spices and ingredients that bring the warmth of Southeast Asia to Montréal.
+        </p>
+        <p class="about-body" style="margin-top:1rem;">
+          Our Nasi Lemak — coconut-rice, sambal, ikan bilis, crispy chicken, egg and peanuts — is what keeps people coming back. But don't sleep on the Rendang Ayam, the Chicken 65, or our famous Saturday Special.
+        </p>
+        <div class="about-details">
+          <div class="detail-row">
+            <span class="detail-icon">📍</span>
+            <div class="detail-info">
+              <strong>997 Av. Ogilvy, Parc-Extension</strong>
+              <span>Montréal, QC H3N 2T3</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">📞</span>
+            <div class="detail-info">
+              <strong>+1 (514) 495-7664</strong>
+              <span>Call to order or ask questions</span>
+            </div>
+          </div>
+          <div class="detail-row">
+            <span class="detail-icon">💰</span>
+            <div class="detail-info">
+              <strong>Generous portions · Fair prices</strong>
+              <span>Mains from ~$14 – $22</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<div class="menu-section" id="menu">
+  <div class="menu-inner">
+    <div class="section-label">What We Cook</div>
+    <h2 class="section-title">The Menu</h2>
+    <div class="menu-grid">
+      <div class="menu-card">
+        <span class="menu-emoji">🍚</span>
+        <div class="menu-name">Nasi Lemak</div>
+        <p class="menu-desc">Fragrant coconut rice with crispy ikan bilis, roasted peanuts, egg, sambal, and your choice of chicken or fish. Our signature dish.</p>
+        <div class="menu-origin">🇲🇾 Malaysian Classic</div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🍗</span>
+        <div class="menu-name">Rendang Ayam</div>
+        <p class="menu-desc">Slow-cooked chicken in a rich coconut and lemongrass curry, caramelized to perfection. Deep, layered, unforgettable.</p>
+        <div class="menu-origin">🇲🇾 Malaysian</div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🌶️</span>
+        <div class="menu-name">Chicken 65</div>
+        <p class="menu-desc">Fiery, spiced, deep-fried chicken — a South Indian street food favourite. Crispy outside, tender inside.</p>
+        <div class="menu-origin">🇮🇳 South Indian</div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🥘</span>
+        <div class="menu-name">Saturday Special</div>
+        <p class="menu-desc">Our weekend feast — a curated plate with fish, shrimp, chicken curry, vegetables, and Chicken 65. A full journey in one dish.</p>
+        <div class="menu-origin">⭐ Chef's Special</div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🍜</span>
+        <div class="menu-name">Chicken Noodles</div>
+        <p class="menu-desc">Wok-tossed noodles with tender chicken and aromatic spices. Fresh, satisfying, and full of flavour.</p>
+        <div class="menu-origin">🇲🇾 Malaysian</div>
+      </div>
+      <div class="menu-card">
+        <span class="menu-emoji">🌿</span>
+        <div class="menu-name">Vegetarian Options</div>
+        <p class="menu-desc">We cater to all diets. Ask us about our vegetarian-friendly versions — the kitchen is happy to accommodate.</p>
+        <div class="menu-origin">🌱 Vegetarian-Friendly</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews-section" id="reviews">
+  <div class="reviews-inner">
+    <div class="section-label">What Guests Say</div>
+    <h2 class="section-title">640+ Five-Star Stories</h2>
+    <div class="review-cards">
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"A true gem in Parc-Ex. The Nasi Lemak was outstanding — rich, flavorful, and clearly made with love. The owner and his wife guide you warmly through the menu."</p>
+        <div class="review-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"As someone who spent a lot of time in Singapore, the Malay dishes here take me right back. Generous portions, flavours are spot on. We're debating coming back for takeout on our way out of town."</p>
+        <div class="review-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">"The food really brought us back to our trip to Bali. The husband and wife team were super nice and welcoming! Loved the nasi lemak and the rendang ayam."</p>
+        <div class="review-author">— Google Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="hours">
+  <div class="hours-section">
+    <div class="section-label">Come See Us</div>
+    <h2 class="section-title">Hours</h2>
+    <div class="hours-grid">
+      <div class="hours-row"><span class="hours-day">Monday</span><span class="hours-time">11:00 AM – 9:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Tuesday</span><span class="hours-time">11:00 AM – 9:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Wednesday</span><span class="hours-time">11:00 AM – 9:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Thursday</span><span class="hours-time">11:00 AM – 9:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Friday</span><span class="hours-time">11:00 AM – 10:30 PM</span></div>
+      <div class="hours-row"><span class="hours-day">Saturday</span><span class="hours-time">11:00 AM – 9:30 PM <span style="color:var(--spice);font-size:0.75rem;">★ Saturday Special</span></span></div>
+      <div class="hours-row" style="grid-column: span 2;"><span class="hours-day">Sunday</span><span class="hours-closed">Closed</span></div>
+    </div>
+  </div>
+</div>
+
+<div class="findus-section" id="visit">
+  <div class="findus-inner">
+    <div class="section-label">Location</div>
+    <h2 class="section-title">Find Us</h2>
+    <div class="contact-grid">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div class="contact-label">Address</div>
+        <div class="contact-value">997 Av. Ogilvy<br>Parc-Extension, Montréal</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div class="contact-label">Phone</div>
+        <div class="contact-value">+1 (514) 495-7664</div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">🚇</div>
+        <div class="contact-label">Transit</div>
+        <div class="contact-value">Near Parc Metro Station</div>
+      </div>
+    </div>
+    <div style="margin-top:2.5rem;">
+      <a href="https://maps.google.com/?q=997+Av.+Ogilvy,+Montreal" target="_blank" class="btn-primary">Get Directions</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <p>Restaurant Canada Best · 997 Av. Ogilvy, Montréal, QC · +1 (514) 495-7664</p>
+  <p style="margin-top:0.5rem; font-size:0.65rem;">Malaysian · Sri Lankan · South Indian Cuisine</p>
+</footer>
+
+</body>
+</html>

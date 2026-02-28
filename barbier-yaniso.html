@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Barbier Yaniso — Premier Barbershop · Downtown Montréal</title>
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #0D0D0D;
+    --bone: #F5F0E8;
+    --chrome: #C8C4BC;
+    --razor: #1C1C1C;
+    --gold: #B8970A;
+    --accent: #D42B2B;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--ink);
+    color: var(--bone);
+    font-family: 'Instrument Sans', sans-serif;
+    cursor: none;
+    overflow-x: hidden;
+  }
+
+  /* CUSTOM CURSOR */
+  .cursor {
+    position: fixed;
+    width: 12px; height: 12px;
+    background: var(--gold);
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 9999;
+    transform: translate(-50%, -50%);
+    transition: width 0.2s, height 0.2s, background 0.2s;
+    mix-blend-mode: difference;
+  }
+
+  body:hover .cursor { opacity: 1; }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1.5rem 3rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    mix-blend-mode: difference;
+  }
+
+  .nav-logo {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.4rem;
+    color: var(--bone);
+    letter-spacing: 0.15em;
+    text-decoration: none;
+  }
+
+  .nav-logo span { color: var(--gold); }
+
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none;
+  }
+
+  .nav-links a {
+    color: rgba(245,240,232,0.6);
+    text-decoration: none;
+    font-size: 0.75rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    transition: color 0.2s;
+  }
+
+  .nav-links a:hover { color: var(--bone); }
+
+  /* HERO */
+  .hero {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  .hero-left {
+    background: var(--ink);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 8rem 4rem 4rem;
+    position: relative;
+  }
+
+  .hero-left::after {
+    content: '';
+    position: absolute;
+    right: -1px; top: 10%; bottom: 10%;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent, var(--gold), transparent);
+  }
+
+  .hero-eyebrow {
+    font-size: 0.65rem;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(5rem, 10vw, 8rem);
+    line-height: 0.95;
+    letter-spacing: 0.02em;
+    color: var(--bone);
+  }
+
+  .hero-title .accent { color: var(--gold); }
+
+  .hero-sub {
+    margin-top: 2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1.2rem;
+    color: rgba(245,240,232,0.5);
+    line-height: 1.6;
+    max-width: 340px;
+  }
+
+  .hero-cta-group {
+    margin-top: 3rem;
+    display: flex;
+    align-items: center;
+    gap: 2rem;
+  }
+
+  .btn-slash {
+    background: var(--gold);
+    color: var(--ink);
+    padding: 0.9rem 2.2rem;
+    font-family: 'Instrument Sans', sans-serif;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: none;
+    cursor: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.2s;
+  }
+
+  .btn-slash:hover { background: #d4ad0c; }
+
+  .btn-ghost {
+    font-size: 0.75rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.5);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s;
+  }
+
+  .btn-ghost::after { content: '→'; }
+  .btn-ghost:hover { color: var(--bone); }
+
+  .hero-stats {
+    position: absolute;
+    bottom: 3rem; left: 4rem;
+    display: flex;
+    gap: 3rem;
+  }
+
+  .stat { }
+  .stat-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 2.2rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+    line-height: 1;
+  }
+
+  .stat-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: rgba(245,240,232,0.4);
+    margin-top: 0.2rem;
+  }
+
+  .hero-right {
+    background: var(--razor);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        -45deg,
+        transparent,
+        transparent 40px,
+        rgba(200,196,188,0.03) 40px,
+        rgba(200,196,188,0.03) 41px
+      );
+  }
+
+  .barber-pole {
+    position: absolute;
+    left: 0; top: 0; bottom: 0;
+    width: 8px;
+    background: repeating-linear-gradient(
+      to bottom,
+      var(--accent),
+      var(--accent) 30px,
+      var(--bone) 30px,
+      var(--bone) 45px,
+      #002868 45px,
+      #002868 60px
+    );
+    animation: poleScroll 3s linear infinite;
+    opacity: 0.6;
+  }
+
+  @keyframes poleScroll {
+    0% { background-position: 0 0; }
+    100% { background-position: 0 90px; }
+  }
+
+  .scissors-display {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .scissors-icon {
+    font-size: 8rem;
+    display: block;
+    filter: drop-shadow(0 0 40px rgba(184,151,10,0.4));
+    animation: floatScissors 4s ease-in-out infinite;
+  }
+
+  @keyframes floatScissors {
+    0%, 100% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-12px) rotate(3deg); }
+  }
+
+  .tagline-vertical {
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%) rotate(90deg);
+    transform-origin: center;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    letter-spacing: 0.3em;
+    color: rgba(245,240,232,0.15);
+    white-space: nowrap;
+  }
+
+  /* SERVICES */
+  .services-section {
+    padding: 8rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .services-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .eyebrow { font-size: 0.65rem; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); margin-bottom: 0.8rem; }
+
+  .section-title {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: clamp(3rem, 5vw, 4.5rem);
+    letter-spacing: 0.03em;
+    line-height: 1;
+  }
+
+  .services-note {
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 1rem;
+    color: rgba(245,240,232,0.5);
+    max-width: 260px;
+    text-align: right;
+    line-height: 1.65;
+  }
+
+  .services-list {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    border: 1px solid rgba(200,196,188,0.1);
+  }
+
+  .service-item {
+    padding: 2.5rem;
+    border-right: 1px solid rgba(200,196,188,0.1);
+    position: relative;
+    transition: background 0.3s;
+  }
+
+  .service-item:last-child { border-right: none; }
+  .service-item:hover { background: rgba(184,151,10,0.05); }
+
+  .service-item::after {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.3s;
+  }
+
+  .service-item:hover::after { transform: scaleX(1); }
+
+  .service-num {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.2);
+    letter-spacing: 0.1em;
+    margin-bottom: 1.5rem;
+  }
+
+  .service-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 1.6rem;
+    font-weight: 400;
+    margin-bottom: 0.8rem;
+    line-height: 1.2;
+  }
+
+  .service-desc {
+    font-size: 0.8rem;
+    color: rgba(245,240,232,0.45);
+    line-height: 1.7;
+  }
+
+  .service-price {
+    margin-top: 1.5rem;
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 1.3rem;
+    color: var(--gold);
+    letter-spacing: 0.05em;
+  }
+
+  /* ABOUT STRIP */
+  .about-strip {
+    background: var(--razor);
+    padding: 6rem 4rem;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 6rem;
+    align-items: center;
+  }
+
+  .about-visual {
+    position: relative;
+    height: 500px;
+    background: linear-gradient(135deg, #1A1A1A, #2a2a2a);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .about-visual::before {
+    content: '✂';
+    font-size: 10rem;
+    opacity: 0.08;
+    position: absolute;
+  }
+
+  .rating-block {
+    position: absolute;
+    bottom: 2rem; right: 2rem;
+    background: var(--gold);
+    color: var(--ink);
+    padding: 1.2rem 1.5rem;
+    text-align: center;
+    clip-path: polygon(0 0, calc(100% - 8px) 0, 100% 8px, 100% 100%, 8px 100%, 0 calc(100% - 8px));
+  }
+
+  .rating-block .num { font-family: 'Bebas Neue', sans-serif; font-size: 2.5rem; letter-spacing: 0.05em; display: block; line-height: 1; }
+  .rating-block .sub { font-size: 0.6rem; letter-spacing: 0.12em; text-transform: uppercase; opacity: 0.7; }
+
+  .about-reviews-count {
+    position: absolute;
+    top: 2rem; left: 2rem;
+    background: rgba(245,240,232,0.05);
+    border: 1px solid rgba(245,240,232,0.1);
+    padding: 0.8rem 1.2rem;
+    font-family: 'Cormorant Garamond', serif;
+    font-style: italic;
+    font-size: 0.9rem;
+    color: rgba(245,240,232,0.5);
+  }
+
+  .about-text h2 {
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 3.5rem;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    margin-top: 1rem;
+  }
+
+  .about-text h2 .gold { color: var(--gold); }
+
+  .about-body {
+    margin-top: 1.5rem;
+    font-size: 0.88rem;
+    line-height: 1.85;
+    color: rgba(245,240,232,0.55);
+  }
+
+  .about-details { margin-top: 2rem; display: flex; flex-direction: column; gap: 0.8rem; }
+
+  .detail {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    font-size: 0.82rem;
+    color: rgba(245,240,232,0.6);
+    padding-bottom: 0.8rem;
+    border-bottom: 1px solid rgba(200,196,188,0.08);
+  }
+
+  .detail:last-child { border-bottom: none; }
+  .detail-dot { width: 4px; height: 4px; border-radius: 50%; background: var(--gold); flex-shrink: 0; }
+  .detail strong { color: var(--bone); margin-right: 0.3rem; }
+
+  /* REVIEWS */
+  .reviews-section {
+    padding: 8rem 4rem;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .reviews-ticker {
+    overflow: hidden;
+    margin-top: 3rem;
+    position: relative;
+  }
+
+  .reviews-ticker::before, .reviews-ticker::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 80px;
+    z-index: 2;
+  }
+
+  .reviews-ticker::before { left: 0; background: linear-gradient(to right, var(--ink), transparent); }
+  .reviews-ticker::after { right: 0; background: linear-gradient(to left, var(--ink), transparent); }
+
+  .reviews-track {
+    display: flex;
+    gap: 1.5rem;
+    animation: scrollReviews 30s linear infinite;
+    width: max-content;
+  }
+
+  .reviews-track:hover { animation-play-state: paused; }
+
+  @keyframes scrollReviews {
+    0% { transform: translateX(0); }
+    100% { transform: translateX(-50%); }
+  }
+
+  .review-card {
+    width: 320px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(200,196,188,0.1);
+    padding: 2rem;
+    flex-shrink: 0;
+  }
+
+  .rc-stars { color: var(--gold); letter-spacing: 0.05em; font-size: 0.85rem; margin-bottom: 1rem; }
+  .rc-text { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1rem; line-height: 1.7; color: rgba(245,240,232,0.6); }
+  .rc-author { margin-top: 1.2rem; font-size: 0.7rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(245,240,232,0.3); }
+
+  /* BOOK / CTA */
+  .book-section {
+    margin: 0;
+    padding: 8rem 4rem;
+    background: var(--bone);
+    color: var(--ink);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .book-section::before {
+    content: 'YANISO';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'Bebas Neue', sans-serif;
+    font-size: 18rem;
+    letter-spacing: 0.02em;
+    color: rgba(0,0,0,0.04);
+    white-space: nowrap;
+    pointer-events: none;
+  }
+
+  .book-inner { position: relative; z-index: 1; }
+  .book-section .eyebrow { color: var(--gold); }
+  .book-title { font-family: 'Bebas Neue', sans-serif; font-size: clamp(3rem, 6vw, 5rem); letter-spacing: 0.03em; line-height: 1; color: var(--ink); margin-top: 0.5rem; }
+  .book-sub { font-family: 'Cormorant Garamond', serif; font-style: italic; font-size: 1.1rem; color: rgba(0,0,0,0.5); margin-top: 1rem; margin-bottom: 2.5rem; }
+
+  .book-options {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .btn-dark {
+    background: var(--ink);
+    color: var(--bone);
+    padding: 0.9rem 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    clip-path: polygon(0 0, calc(100% - 12px) 0, 100% 12px, 100% 100%, 12px 100%, 0 calc(100% - 12px));
+    transition: background 0.2s;
+  }
+
+  .btn-dark:hover { background: #2a2a2a; }
+
+  .btn-dark-outline {
+    background: transparent;
+    color: var(--ink);
+    padding: 0.9rem 2.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1.5px solid var(--ink);
+    transition: background 0.2s, color 0.2s;
+  }
+
+  .btn-dark-outline:hover { background: var(--ink); color: var(--bone); }
+
+  /* FOOTER */
+  footer {
+    background: var(--ink);
+    border-top: 1px solid rgba(200,196,188,0.1);
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .footer-logo { font-family: 'Bebas Neue', sans-serif; font-size: 1.5rem; letter-spacing: 0.15em; }
+  .footer-logo span { color: var(--gold); }
+
+  .footer-info { text-align: center; font-size: 0.75rem; color: rgba(245,240,232,0.3); line-height: 1.8; }
+  .footer-social { text-align: right; font-size: 0.75rem; color: rgba(245,240,232,0.3); }
+  .footer-social a { color: var(--gold); text-decoration: none; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .about-strip { grid-template-columns: 1fr; }
+    .services-list { grid-template-columns: 1fr 1fr; }
+    .nav-links { display: none; }
+    .hero-left { padding: 7rem 2rem 2rem; }
+  }
+</style>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+
+<nav>
+  <a class="nav-logo" href="#">YANISO<span>.</span></a>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#reviews">Reviews</a></li>
+    <li><a href="#book">Book</a></li>
+  </ul>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">★★★★★ Rated · Downtown Montréal</div>
+    <h1 class="hero-title">SHARP<br>CUTS.<br><span class="accent">FINE</span><br>CRAFT.</h1>
+    <p class="hero-sub">Precision barbering in the heart of Montréal. Walk in fresh, walk out sharp.</p>
+    <div class="hero-cta-group">
+      <a href="tel:+15144732483" class="btn-slash">Call to Book</a>
+      <a href="#services" class="btn-ghost">Services</a>
+    </div>
+    <div class="hero-stats">
+      <div class="stat">
+        <div class="stat-num">4.9</div>
+        <div class="stat-label">Google Rating</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">1.5K+</div>
+        <div class="stat-label">Reviews</div>
+      </div>
+      <div class="stat">
+        <div class="stat-num">✓</div>
+        <div class="stat-label">Walk-ins Welcome</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="barber-pole"></div>
+    <div class="scissors-display">
+      <span class="scissors-icon">✂️</span>
+    </div>
+    <div class="tagline-vertical">FRESH CUTS · REAL CRAFT · YANISO</div>
+  </div>
+</div>
+
+<div class="services-section" id="services">
+  <div class="services-header">
+    <div>
+      <div class="eyebrow">What We Offer</div>
+      <h2 class="section-title">Services</h2>
+    </div>
+    <div class="services-note">Every service is delivered with meticulous attention and expert technique.</div>
+  </div>
+  <div class="services-list">
+    <div class="service-item">
+      <div class="service-num">01</div>
+      <div class="service-name">Classic Haircut</div>
+      <p class="service-desc">Precision scissor or clipper cut tailored to your face shape and style preference.</p>
+      <div class="service-price">From $30</div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">02</div>
+      <div class="service-name">Fade & Taper</div>
+      <p class="service-desc">High, mid or low fades. Clean lines, sharp edges. Our specialty.</p>
+      <div class="service-price">From $35</div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">03</div>
+      <div class="service-name">Beard Trim & Line-up</div>
+      <p class="service-desc">Defined edges, sculpted lines, and a clean finish for your beard.</p>
+      <div class="service-price">From $20</div>
+    </div>
+    <div class="service-item">
+      <div class="service-num">04</div>
+      <div class="service-name">Full Grooming Package</div>
+      <p class="service-desc">Haircut + beard + hot towel. The complete experience.</p>
+      <div class="service-price">From $55</div>
+    </div>
+  </div>
+</div>
+
+<div class="about-strip" id="about">
+  <div class="about-visual">
+    <div class="about-reviews-count">"Best barber in Montréal"</div>
+    <div class="rating-block">
+      <span class="num">4.9</span>
+      <span class="sub">1,564 Reviews</span>
+    </div>
+  </div>
+  <div class="about-text">
+    <div class="eyebrow">Our Story</div>
+    <h2>THE BEST<br>IN <span class="gold">DOWNTOWN</span></h2>
+    <p class="about-body">
+      Barbier Yaniso has built a reputation as one of Montréal's finest barbershops through one simple commitment: exceptional craft, every single time. No shortcuts. No rush. Just great haircuts and a welcoming atmosphere that keeps clients coming back — from across Montréal and beyond.
+    </p>
+    <p class="about-body">
+      Whether you're a first-timer or a regular, you'll be greeted with the same warmth and professionalism that's earned us over 1,500 five-star reviews.
+    </p>
+    <div class="about-details">
+      <div class="detail">
+        <div class="detail-dot"></div>
+        <span><strong>Address:</strong> 1405 Blvd. De Maisonneuve Ouest, Local B</span>
+      </div>
+      <div class="detail">
+        <div class="detail-dot"></div>
+        <span><strong>Phone:</strong> +1 (514) 473-2483</span>
+      </div>
+      <div class="detail">
+        <div class="detail-dot"></div>
+        <span><strong>Hours:</strong> Mon–Sun, 8:00 AM – midnight</span>
+      </div>
+      <div class="detail">
+        <div class="detail-dot"></div>
+        <span>Walk-ins welcome · Late-night cuts available</span>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="reviews-section" id="reviews">
+  <div class="eyebrow">Testimonials</div>
+  <h2 class="section-title">WHAT CLIENTS SAY</h2>
+  <div class="reviews-ticker">
+    <div class="reviews-track">
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Abu Yaniso was very kind. He took his time to deliver a professional cut. Highly recommend. Other Barbers look professional and focused — I didn't see anyone on their phone."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Rolled in on a Friday with three teenagers needing fresh back to school fades. Absolutely magnificent work, kids are saying best haircuts of their lives. Real craftsmanship."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Clean fades, sharp beard work, and amazing attention to detail. Always leave feeling fresh and confident. It's been a year I've been going there and hands down the best barber I've had."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Yaniso is the best hair salon in Montreal. I am from Toronto and visit Montreal regularly and I always come to Yaniso for a fresh, timely, stylish cut."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"All of them are super sympathetic and very professional! I was looking for someone who could do my undercut for a while — it took some time but I finally found the right place."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <!-- Duplicate for infinite scroll -->
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Abu Yaniso was very kind. He took his time to deliver a professional cut. Highly recommend. Other Barbers look professional and focused — I didn't see anyone on their phone."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Rolled in on a Friday with three teenagers needing fresh back to school fades. Absolutely magnificent work, kids are saying best haircuts of their lives. Real craftsmanship."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Clean fades, sharp beard work, and amazing attention to detail. Always leave feeling fresh and confident. It's been a year I've been going there and hands down the best barber I've had."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"Yaniso is the best hair salon in Montreal. I am from Toronto and visit Montreal regularly and I always come to Yaniso for a fresh, timely, stylish cut."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+      <div class="review-card">
+        <div class="rc-stars">★★★★★</div>
+        <p class="rc-text">"All of them are super sympathetic and very professional! I was looking for someone who could do my undercut for a while — it took some time but I finally found the right place."</p>
+        <div class="rc-author">— Google Review</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="book-section" id="book">
+  <div class="book-inner">
+    <div class="eyebrow">Ready?</div>
+    <h2 class="book-title">BOOK YOUR<br>APPOINTMENT</h2>
+    <p class="book-sub">Walk-ins always welcome. Or call ahead to secure your spot.</p>
+    <div class="book-options">
+      <a href="tel:+15144732483" class="btn-dark">Call: (514) 473-2483</a>
+      <a href="https://maps.google.com/?q=1405+Blvd+de+Maisonneuve+Ouest+Montreal" target="_blank" class="btn-dark-outline">Get Directions</a>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">YANISO<span>.</span></div>
+  <div class="footer-info">
+    1405 Blvd. De Maisonneuve Ouest, Local B · Montréal, QC<br>
+    Mon–Sun · 8:00 AM – Midnight · Walk-ins Welcome
+  </div>
+  <div class="footer-social">
+    Follow us<br>
+    <a href="#">@yaniso.barber</a>
+  </div>
+</footer>
+
+<script>
+  const cursor = document.getElementById('cursor');
+  document.addEventListener('mousemove', e => {
+    cursor.style.left = e.clientX + 'px';
+    cursor.style.top = e.clientY + 'px';
+  });
+</script>
+</body>
+</html>

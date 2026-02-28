@@ -1,0 +1,714 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Suit Center — Master Tailoring · Montréal</title>
+<link href="https://fonts.googleapis.com/css2?family=IM+Fell+English:ital@0;1&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --charcoal: #1E1E1E;
+    --slate: #2C2C34;
+    --ivory: #F8F5F0;
+    --mist: #E8E4DC;
+    --navy: #1A2540;
+    --bronze: #9B7A4A;
+    --silver: #9CA3AF;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--ivory);
+    color: var(--charcoal);
+    font-family: 'Jost', sans-serif;
+    overflow-x: hidden;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    background: rgba(248,245,240,0.92);
+    backdrop-filter: blur(16px);
+    border-bottom: 1px solid rgba(30,30,30,0.08);
+    padding: 1.2rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .nav-brand { display: flex; flex-direction: column; gap: 0.1rem; }
+  .brand-main { font-family: 'IM Fell English', serif; font-size: 1.3rem; letter-spacing: 0.02em; color: var(--charcoal); }
+  .brand-sub { font-size: 0.6rem; letter-spacing: 0.3em; text-transform: uppercase; color: var(--bronze); }
+
+  .nav-links { display: flex; gap: 2.5rem; list-style: none; }
+  .nav-links a { color: rgba(30,30,30,0.5); text-decoration: none; font-size: 0.75rem; letter-spacing: 0.1em; text-transform: uppercase; transition: color 0.2s; }
+  .nav-links a:hover { color: var(--charcoal); }
+
+  .nav-cta {
+    background: var(--charcoal);
+    color: var(--ivory);
+    padding: 0.65rem 1.5rem;
+    font-size: 0.72rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s;
+  }
+
+  .nav-cta:hover { background: var(--navy); }
+
+  /* HERO */
+  .hero {
+    min-height: 100vh;
+    display: grid;
+    grid-template-columns: 1.1fr 0.9fr;
+    padding-top: 5rem;
+  }
+
+  .hero-left {
+    background: var(--navy);
+    padding: 6rem 5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .hero-left::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 70% 30%, rgba(155,122,74,0.15) 0%, transparent 50%),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 60px,
+        rgba(255,255,255,0.015) 60px,
+        rgba(255,255,255,0.015) 61px
+      );
+  }
+
+  .hero-label {
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 2rem;
+    position: relative;
+  }
+
+  .hero-label::before {
+    content: '';
+    width: 30px;
+    height: 1px;
+    background: var(--bronze);
+  }
+
+  .hero-label-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bronze);
+  }
+
+  .hero-h1 {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(3.5rem, 6vw, 5.5rem);
+    line-height: 1.1;
+    color: var(--ivory);
+    position: relative;
+  }
+
+  .hero-h1 em { font-style: italic; color: var(--bronze); }
+
+  .hero-p {
+    margin-top: 2rem;
+    font-size: 0.9rem;
+    line-height: 1.85;
+    color: rgba(248,245,240,0.55);
+    max-width: 380px;
+    font-weight: 300;
+    position: relative;
+  }
+
+  .hero-actions {
+    margin-top: 3rem;
+    display: flex;
+    gap: 1rem;
+    position: relative;
+  }
+
+  .btn-primary {
+    background: var(--bronze);
+    color: var(--ivory);
+    padding: 0.9rem 2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    transition: background 0.2s, transform 0.15s;
+    display: inline-block;
+  }
+
+  .btn-primary:hover { background: #7a5f38; transform: translateY(-1px); }
+
+  .btn-line {
+    background: transparent;
+    color: var(--ivory);
+    padding: 0.9rem 2rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border: 1px solid rgba(248,245,240,0.2);
+    transition: border-color 0.2s, color 0.2s;
+    display: inline-block;
+  }
+
+  .btn-line:hover { border-color: var(--bronze); color: var(--bronze); }
+
+  .hero-rating {
+    position: relative;
+    margin-top: 4rem;
+    display: flex;
+    align-items: center;
+    gap: 1.5rem;
+  }
+
+  .rating-stars { color: var(--bronze); letter-spacing: 0.1em; font-size: 1rem; }
+
+  .rating-text {
+    font-size: 0.78rem;
+    color: rgba(248,245,240,0.4);
+    letter-spacing: 0.04em;
+  }
+
+  .rating-text strong { color: var(--ivory); font-weight: 500; }
+
+  .hero-right {
+    background: var(--mist);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .fabric-texture {
+    position: absolute;
+    inset: 0;
+    background-image:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 3px,
+        rgba(30,30,30,0.03) 3px,
+        rgba(30,30,30,0.03) 4px
+      ),
+      repeating-linear-gradient(
+        90deg,
+        transparent,
+        transparent 3px,
+        rgba(30,30,30,0.03) 3px,
+        rgba(30,30,30,0.03) 4px
+      );
+  }
+
+  .suit-display {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+  }
+
+  .suit-emoji { font-size: 9rem; filter: drop-shadow(0 20px 40px rgba(0,0,0,0.12)); display: block; }
+
+  .trust-badge {
+    position: absolute;
+    bottom: 2.5rem;
+    right: 2.5rem;
+    background: var(--charcoal);
+    color: var(--ivory);
+    padding: 1.2rem 1.8rem;
+    text-align: center;
+    min-width: 150px;
+  }
+
+  .trust-num { font-family: 'IM Fell English', serif; font-size: 2rem; display: block; color: var(--bronze); }
+  .trust-lbl { font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; opacity: 0.5; margin-top: 0.2rem; }
+
+  .trust-badge2 {
+    position: absolute;
+    top: 2.5rem;
+    left: 2.5rem;
+    background: white;
+    border: 1px solid rgba(30,30,30,0.1);
+    padding: 1rem 1.5rem;
+    font-size: 0.72rem;
+    color: var(--charcoal);
+  }
+
+  .trust-badge2 strong { display: block; font-size: 1.1rem; font-family: 'IM Fell English', serif; color: var(--navy); }
+
+  /* SERVICES */
+  .services { padding: 8rem 4rem; max-width: 1200px; margin: 0 auto; }
+
+  .section-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 4rem;
+  }
+
+  .section-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+    margin-bottom: 0.8rem;
+  }
+
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--bronze); }
+
+  .section-title {
+    font-family: 'IM Fell English', serif;
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    color: var(--charcoal);
+    line-height: 1.1;
+  }
+
+  .section-note { font-size: 0.85rem; color: var(--silver); max-width: 240px; text-align: right; line-height: 1.65; }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+    background: rgba(30,30,30,0.08);
+  }
+
+  .service-card {
+    background: var(--ivory);
+    padding: 2.8rem;
+    transition: background 0.3s;
+  }
+
+  .service-card:hover { background: var(--navy); color: var(--ivory); }
+  .service-card:hover .sc-label { color: var(--bronze); }
+  .service-card:hover .sc-desc { color: rgba(248,245,240,0.55); }
+  .service-card:hover .sc-price { color: var(--bronze); }
+
+  .sc-icon { font-size: 1.8rem; margin-bottom: 1.5rem; display: block; }
+  .sc-label {
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--bronze);
+    margin-bottom: 0.6rem;
+    transition: color 0.3s;
+  }
+
+  .sc-name { font-family: 'IM Fell English', serif; font-size: 1.4rem; margin-bottom: 0.8rem; }
+  .sc-desc { font-size: 0.82rem; line-height: 1.75; color: var(--silver); transition: color 0.3s; }
+  .sc-price { margin-top: 1.5rem; font-size: 0.85rem; font-weight: 500; color: var(--charcoal); transition: color 0.3s; }
+
+  /* WHY US */
+  .why-section {
+    background: var(--charcoal);
+    padding: 8rem 4rem;
+  }
+
+  .why-inner { max-width: 1200px; margin: 0 auto; }
+  .why-section .section-label { color: var(--bronze); }
+  .why-section .section-title { color: var(--ivory); }
+
+  .why-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    gap: 6rem;
+    margin-top: 4rem;
+    align-items: start;
+  }
+
+  .why-intro {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.3rem;
+    line-height: 1.7;
+    color: rgba(248,245,240,0.6);
+  }
+
+  .why-features { display: flex; flex-direction: column; gap: 0; }
+
+  .feature-row {
+    display: grid;
+    grid-template-columns: 50px 1fr;
+    gap: 1.5rem;
+    padding: 2rem 0;
+    border-bottom: 1px solid rgba(248,245,240,0.06);
+    align-items: start;
+    cursor: default;
+    transition: padding-left 0.3s;
+  }
+
+  .feature-row:hover { padding-left: 0.5rem; }
+  .feature-row:first-child { border-top: 1px solid rgba(248,245,240,0.06); }
+
+  .feature-num {
+    font-family: 'IM Fell English', serif;
+    font-size: 1.2rem;
+    color: var(--bronze);
+    padding-top: 0.2rem;
+  }
+
+  .feature-content h4 { color: var(--ivory); font-size: 1rem; font-weight: 500; margin-bottom: 0.4rem; }
+  .feature-content p { font-size: 0.82rem; color: rgba(248,245,240,0.45); line-height: 1.7; }
+
+  /* TESTIMONIALS */
+  .testimonials { padding: 8rem 4rem; max-width: 1200px; margin: 0 auto; }
+
+  .testimonial-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+
+  .testimonial-card {
+    background: white;
+    padding: 2.5rem;
+    border-left: 3px solid var(--bronze);
+    box-shadow: 0 4px 30px rgba(0,0,0,0.04);
+    transition: transform 0.2s;
+  }
+
+  .testimonial-card:hover { transform: translateY(-3px); }
+
+  .t-quote {
+    font-family: 'IM Fell English', serif;
+    font-style: italic;
+    font-size: 1.05rem;
+    line-height: 1.75;
+    color: var(--slate);
+  }
+
+  .t-author {
+    margin-top: 1.5rem;
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--bronze);
+  }
+
+  .t-stars { margin-bottom: 1rem; color: var(--bronze); font-size: 0.85rem; }
+
+  /* VISIT */
+  .visit-section {
+    background: var(--navy);
+    padding: 8rem 4rem;
+  }
+
+  .visit-inner { max-width: 1000px; margin: 0 auto; display: grid; grid-template-columns: 1fr 1fr; gap: 6rem; align-items: center; }
+
+  .visit-section .section-label { color: var(--bronze); }
+  .visit-section .section-title { color: var(--ivory); }
+
+  .visit-body { margin-top: 1.5rem; font-size: 0.88rem; line-height: 1.85; color: rgba(248,245,240,0.55); font-weight: 300; }
+
+  .contact-list { margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1.2rem; }
+
+  .cl-row {
+    display: flex;
+    gap: 1.2rem;
+    align-items: flex-start;
+    padding-bottom: 1.2rem;
+    border-bottom: 1px solid rgba(248,245,240,0.07);
+  }
+
+  .cl-row:last-child { border-bottom: none; }
+  .cl-icon { color: var(--bronze); font-size: 1.1rem; margin-top: 0.1rem; flex-shrink: 0; }
+  .cl-label { font-size: 0.65rem; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(248,245,240,0.35); margin-bottom: 0.2rem; }
+  .cl-value { font-size: 0.88rem; color: var(--ivory); }
+
+  .hours-table { margin-top: 1rem; }
+  .hr { display: flex; justify-content: space-between; padding: 0.6rem 0; border-bottom: 1px solid rgba(248,245,240,0.06); font-size: 0.82rem; }
+  .hr:last-child { border-bottom: none; }
+  .hr-day { color: rgba(248,245,240,0.5); }
+  .hr-time { color: var(--ivory); }
+  .hr-closed { color: var(--bronze); }
+
+  .visit-cta { margin-top: 2.5rem; }
+
+  /* FOOTER */
+  footer {
+    background: #0f0f0f;
+    padding: 3rem 4rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-top: 1px solid rgba(155,122,74,0.15);
+  }
+
+  .footer-brand { font-family: 'IM Fell English', serif; font-size: 1.3rem; color: var(--ivory); }
+  .footer-brand span { color: var(--bronze); }
+  .footer-copy { font-size: 0.72rem; color: rgba(248,245,240,0.25); letter-spacing: 0.04em; }
+  .footer-tag { font-size: 0.72rem; color: var(--bronze); font-style: italic; font-family: 'IM Fell English', serif; }
+
+  /* ANIMATIONS */
+  @keyframes fadeIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+
+  .animate-in { animation: fadeIn 0.8s ease forwards; }
+  .delay-1 { animation-delay: 0.15s; opacity: 0; }
+  .delay-2 { animation-delay: 0.3s; opacity: 0; }
+  .delay-3 { animation-delay: 0.45s; opacity: 0; }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-right { display: none; }
+    .why-grid, .visit-inner { grid-template-columns: 1fr; }
+    .testimonial-grid { grid-template-columns: 1fr; }
+    .services-grid { grid-template-columns: 1fr; }
+    .nav-links, .nav-cta { display: none; }
+    .hero-left { padding: 7rem 2rem 4rem; }
+    nav { padding: 1.2rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="nav-brand">
+    <div class="brand-main">Suit Center</div>
+    <div class="brand-sub">Montréal — Master Tailor</div>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#services">Services</a></li>
+    <li><a href="#why">Why Us</a></li>
+    <li><a href="#testimonials">Reviews</a></li>
+    <li><a href="#visit">Visit</a></li>
+  </ul>
+  <a href="tel:+15147912983" class="nav-cta">Book a Fitting</a>
+</nav>
+
+<div class="hero">
+  <div class="hero-left">
+    <div class="hero-label">
+      <span class="hero-label-text">Master Tailoring Since — René-Lévesque, Montréal</span>
+    </div>
+    <h1 class="hero-h1 animate-in">
+      Clothes that<br>fit like they<br>were <em>made for you.</em>
+    </h1>
+    <p class="hero-p animate-in delay-1">
+      Halim and his team at Suit Center have earned a reputation as one of downtown Montréal's most trusted tailors — for alterations, custom suits, and everything in between.
+    </p>
+    <div class="hero-actions animate-in delay-2">
+      <a href="tel:+15147912983" class="btn-primary">Call for a Fitting</a>
+      <a href="#services" class="btn-line">See Services</a>
+    </div>
+    <div class="hero-rating animate-in delay-3">
+      <span class="rating-stars">★★★★★</span>
+      <span class="rating-text"><strong>4.9</strong> · 66 Google Reviews</span>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="fabric-texture"></div>
+    <div class="suit-display">
+      <span class="suit-emoji">🤵</span>
+    </div>
+    <div class="trust-badge">
+      <span class="trust-num">4.9</span>
+      <span class="trust-lbl">Google Rating</span>
+    </div>
+    <div class="trust-badge2">
+      <strong>100%</strong>
+      Satisfaction Guaranteed
+    </div>
+  </div>
+</div>
+
+<div class="services" id="services">
+  <div class="section-top">
+    <div>
+      <div class="section-label">Craftsmanship</div>
+      <h2 class="section-title">What We Do</h2>
+    </div>
+    <div class="section-note">Every garment is treated with care and returned to perfection.</div>
+  </div>
+  <div class="services-grid">
+    <div class="service-card">
+      <span class="sc-icon">👔</span>
+      <div class="sc-label">Tailoring</div>
+      <div class="sc-name">Suit Alterations</div>
+      <p class="sc-desc">Jackets, trousers, waistbands — we adjust every seam to ensure a flawless silhouette. Wedding suits, business wear, or vintage pieces.</p>
+      <div class="sc-price">From $40</div>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">✂️</span>
+      <div class="sc-label">Custom</div>
+      <div class="sc-name">Bespoke Suits</div>
+      <p class="sc-desc">Work with Halim to create a suit that's entirely yours. Fabric selection, precise measurements, and multiple fittings.</p>
+      <div class="sc-price">Consultation Required</div>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">👗</span>
+      <div class="sc-label">Alterations</div>
+      <div class="sc-name">Dress & Formal Wear</div>
+      <p class="sc-desc">Wedding dresses, gowns, formal attire. We understand the precision these garments demand — and we deliver it.</p>
+      <div class="sc-price">From $30</div>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">👖</span>
+      <div class="sc-label">Everyday</div>
+      <div class="sc-name">Pants & Hemming</div>
+      <p class="sc-desc">Jeans, chinos, trousers. Hem adjustments, tapering, waist alterations — quick turnaround.</p>
+      <div class="sc-price">From $15</div>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">🧥</span>
+      <div class="sc-label">Outerwear</div>
+      <div class="sc-name">Coats & Jackets</div>
+      <p class="sc-desc">Blazers, overcoats, leather jackets. We resize and reshape while preserving the character of the garment.</p>
+      <div class="sc-price">From $50</div>
+    </div>
+    <div class="service-card">
+      <span class="sc-icon">🔧</span>
+      <div class="sc-label">Repairs</div>
+      <div class="sc-name">Repairs & Restyling</div>
+      <p class="sc-desc">Torn seams, missing buttons, broken zippers. We also restyle garments — let Halim imagine what your clothes could become.</p>
+      <div class="sc-price">From $10</div>
+    </div>
+  </div>
+</div>
+
+<div class="why-section" id="why">
+  <div class="why-inner">
+    <div class="section-label">Why Choose Us</div>
+    <h2 class="section-title" style="color:var(--ivory);">The Suit Center<br>Difference</h2>
+    <div class="why-grid">
+      <p class="why-intro">
+        "Halim doesn't just alter clothes — he imagines what you truly desire. True tailoring is a craft that is slowly disappearing into time. Halim is one of the last bearers of it."
+        <br><br>— Google Review
+      </p>
+      <div class="why-features">
+        <div class="feature-row">
+          <div class="feature-num">I.</div>
+          <div class="feature-content">
+            <h4>Expert Craftsmanship</h4>
+            <p>Decades of experience with everything from high-end designer wear to everyday garments. Every stitch placed with intention.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-num">II.</div>
+          <div class="feature-content">
+            <h4>Fair, Transparent Pricing</h4>
+            <p>Quality tailoring shouldn't cost a fortune. We offer premium craftsmanship at honest prices — and you're always quoted upfront.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-num">III.</div>
+          <div class="feature-content">
+            <h4>Fast Turnaround</h4>
+            <p>Most alterations are completed quickly without compromising quality. We understand deadlines — especially for weddings and events.</p>
+          </div>
+        </div>
+        <div class="feature-row">
+          <div class="feature-num">IV.</div>
+          <div class="feature-content">
+            <h4>Personal Touch</h4>
+            <p>Halim listens. He'll understand quickly what you need and offer guidance you didn't know you needed.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="testimonials" id="testimonials">
+  <div class="section-label">Client Stories</div>
+  <h2 class="section-title">Trusted by<br>Montréalers</h2>
+  <div class="testimonial-grid">
+    <div class="testimonial-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Really good price for very high quality service. Halim was very efficient and helped tailor my long sleeve to the perfect length. Would recommend and come again for sure."</p>
+      <div class="t-author">— Google Review</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"He doesn't just alter clothes, he imagines what you truly desire. True tailoring is a craft slowly disappearing into time. Halim is one of the last bearers of that craft."</p>
+      <div class="t-author">— Google Review</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Came very last minute looking for a suit for a wedding, and Halim was able to help me find the perfect suit for a fair price. He worked quickly to make sure I was set. Exceptional service."</p>
+      <div class="t-author">— Google Review</div>
+    </div>
+    <div class="testimonial-card">
+      <div class="t-stars">★★★★★</div>
+      <p class="t-quote">"Got my pants and jeans altered and tapered. They look really good thanks to their great service at a very affordable price. Great people and satisfaction guaranteed."</p>
+      <div class="t-author">— Google Review</div>
+    </div>
+  </div>
+</div>
+
+<div class="visit-section" id="visit">
+  <div class="visit-inner">
+    <div>
+      <div class="section-label">Find Us</div>
+      <h2 class="section-title">Visit the<br>Studio</h2>
+      <p class="visit-body">We're conveniently located in downtown Montréal, easy to reach by transit or car. Walk-ins are always welcome — no appointment needed for most alterations.</p>
+      <div class="contact-list">
+        <div class="cl-row">
+          <span class="cl-icon">📍</span>
+          <div>
+            <div class="cl-label">Address</div>
+            <div class="cl-value">1652 Boul. René-Lévesque O<br>Montréal, QC H3H 2S5</div>
+          </div>
+        </div>
+        <div class="cl-row">
+          <span class="cl-icon">📞</span>
+          <div>
+            <div class="cl-label">Phone</div>
+            <div class="cl-value">+1 (514) 791-2983</div>
+          </div>
+        </div>
+        <div class="cl-row">
+          <span class="cl-icon">🚇</span>
+          <div>
+            <div class="cl-label">Transit</div>
+            <div class="cl-value">Near Guy-Concordia & Atwater Stations</div>
+          </div>
+        </div>
+      </div>
+      <div class="visit-cta">
+        <a href="https://maps.google.com/?q=1652+Boul+Rene-Levesque+O+Montreal" target="_blank" class="btn-primary">Get Directions</a>
+      </div>
+    </div>
+    <div>
+      <div class="section-label">Hours</div>
+      <div class="hours-table">
+        <div class="hr"><span class="hr-day">Monday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Tuesday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Wednesday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Thursday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Friday</span><span class="hr-time">10:00 AM – 6:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Saturday</span><span class="hr-time">10:00 AM – 5:00 PM</span></div>
+        <div class="hr"><span class="hr-day">Sunday</span><span class="hr-closed">Closed</span></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">Suit <span>Center</span></div>
+  <div class="footer-copy">1652 Boul. René-Lévesque O, Montréal · +1 (514) 791-2983</div>
+  <div class="footer-tag">Tailored to perfection.</div>
+</footer>
+
+</body>
+</html>
