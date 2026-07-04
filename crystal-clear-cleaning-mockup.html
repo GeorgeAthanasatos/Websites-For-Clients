@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Crystal Clear Cleaning Service — Windsor, ON</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#F8FBFA;
+    --panel:#EEF6F4;
+    --teal:#0B4F4A;
+    --teal-deep:#08302D;
+    --sage:#6B9C8F;
+    --ink:#1D2523;
+    --ink-soft:#516059;
+    --line:#DCE7E3;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--paper);color:var(--ink);
+    font-family:'Work Sans', sans-serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3,.serif{font-family:'Fraunces', serif;margin:0;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1120px;margin:0 auto;padding:0 28px;}
+
+  nav.top{position:sticky;top:0;z-index:50;background:rgba(248,251,250,0.88);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:76px;}
+  .brand{display:flex;align-items:center;gap:10px;font-family:'Fraunces';font-weight:600;font-size:21px;color:var(--teal-deep);}
+  .brand .gem{color:var(--teal);font-size:19px;}
+  nav.top ul{list-style:none;display:flex;gap:34px;margin:0;padding:0;font-size:14.5px;color:var(--ink-soft);}
+  nav.top ul a:hover{color:var(--teal-deep);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--teal);color:#fff;font-weight:600;font-size:14.5px;
+    padding:12px 24px;border-radius:100px;
+    transition:transform .15s ease, box-shadow .15s ease;
+  }
+  .btn:hover{transform:translateY(-1px);box-shadow:0 10px 24px rgba(11,79,74,0.22);}
+  .btn.ghost{background:transparent;color:var(--teal-deep);border:1px solid var(--line);}
+
+  /* HERO */
+  .hero{padding:88px 0 40px;}
+  .hero-grid{display:grid;grid-template-columns:1.05fr 0.95fr;gap:64px;align-items:center;}
+  .eyebrow{
+    display:inline-flex;align-items:center;gap:9px;font-size:12.5px;letter-spacing:0.1em;text-transform:uppercase;
+    color:var(--teal);font-weight:600;margin-bottom:20px;
+  }
+  .eyebrow::before{content:"";width:22px;height:1px;background:var(--sage);}
+  .hero h1{font-size:clamp(38px,4.6vw,58px);font-weight:500;line-height:1.06;color:var(--teal-deep);letter-spacing:-0.01em;}
+  .hero h1 .accent{font-style:italic;color:var(--sage);}
+  .hero p.lede{font-size:17px;line-height:1.7;color:var(--ink-soft);max-width:460px;margin:22px 0 32px;}
+  .cta-row{display:flex;gap:14px;flex-wrap:wrap;align-items:center;}
+  .stars-inline{color:var(--teal);font-size:14px;}
+
+  /* SIGNATURE — glass wipe */
+  .glasspane{
+    position:relative;aspect-ratio:4/5;border-radius:18px;overflow:hidden;
+    background:
+      radial-gradient(circle at 30% 20%, #E9F6F3, transparent 60%),
+      linear-gradient(160deg, #CFE9E3 0%, #9CCFC4 45%, #4F988A 100%);
+    box-shadow:0 30px 60px -20px rgba(11,79,74,0.35);
+  }
+  .glasspane .droplets{position:absolute;inset:0;}
+  .glasspane .droplets span{
+    position:absolute;border-radius:50%;background:rgba(255,255,255,0.55);
+    box-shadow:0 4px 8px rgba(0,0,0,0.06) inset;
+  }
+  .fog{
+    position:absolute;inset:0;
+    background:
+      linear-gradient(120deg, rgba(255,255,255,0.9) 0%, rgba(255,255,255,0.75) 60%, rgba(255,255,255,0.9) 100%);
+    backdrop-filter:blur(14px) saturate(0.4);
+    -webkit-backdrop-filter:blur(14px) saturate(0.4);
+    animation: wipe 4.5s cubic-bezier(.65,0,.35,1) infinite;
+    clip-path: inset(0 0 0 0);
+  }
+  .squeegee{
+    position:absolute;top:0;bottom:0;width:6px;
+    background:linear-gradient(180deg, #fff, #cfe6e1);
+    box-shadow:0 0 18px rgba(255,255,255,0.9);
+    animation: squeegee-move 4.5s cubic-bezier(.65,0,.35,1) infinite;
+    left:100%;
+  }
+  @keyframes wipe{
+    0%{ clip-path: inset(0 0% 0 0); }
+    45%{ clip-path: inset(0 100% 0 0); }
+    100%{ clip-path: inset(0 100% 0 0); }
+  }
+  @keyframes squeegee-move{
+    0%{ left:0%; opacity:1;}
+    45%{ left:100%; opacity:1;}
+    50%{ opacity:0;}
+    100%{ opacity:0; left:0%;}
+  }
+  .pane-badge{
+    position:absolute;bottom:20px;left:20px;right:20px;
+    background:rgba(8,48,45,0.85);color:#fff;border-radius:12px;padding:16px 18px;
+    display:flex;justify-content:space-between;align-items:center;
+    font-size:13px;backdrop-filter:blur(6px);
+  }
+  .pane-badge .big{font-family:'Fraunces';font-size:22px;}
+
+  /* TICKER STATS */
+  .stats{border:1px solid var(--line);border-radius:14px;background:var(--panel);margin-top:56px;overflow:hidden;}
+  .stats-body{display:flex;}
+  .stat{flex:1;padding:22px 20px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'Fraunces';font-size:28px;color:var(--teal-deep);}
+  .stat .lab{font-size:12.5px;color:var(--ink-soft);margin-top:4px;}
+
+  /* SERVICES */
+  section.services{padding:100px 0;}
+  .section-head{max-width:560px;margin-bottom:52px;}
+  .kicker{color:var(--teal);font-size:12.5px;letter-spacing:0.12em;font-weight:600;text-transform:uppercase;}
+  .section-head h2{font-size:clamp(28px,3.6vw,40px);margin-top:10px;font-weight:500;color:var(--teal-deep);}
+  .cards{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;}
+  .card{background:#fff;border:1px solid var(--line);border-radius:16px;padding:32px 26px;transition:box-shadow .2s ease, transform .2s ease;}
+  .card:hover{box-shadow:0 20px 40px -20px rgba(11,79,74,0.25);transform:translateY(-3px);}
+  .card .ico{width:38px;height:38px;border-radius:10px;background:var(--panel);display:flex;align-items:center;justify-content:center;color:var(--teal);font-size:18px;margin-bottom:18px;}
+  .card h3{font-size:21px;font-weight:500;margin-bottom:8px;color:var(--teal-deep);}
+  .card p{font-size:14.5px;line-height:1.65;color:var(--ink-soft);margin:0;}
+
+  /* PROOF */
+  section.proof{padding:0 0 100px;}
+  .proof-panel{background:var(--teal-deep);border-radius:22px;padding:64px;color:#fff;position:relative;overflow:hidden;}
+  .proof-panel::after{
+    content:"";position:absolute;right:-80px;top:-80px;width:280px;height:280px;border-radius:50%;
+    background:radial-gradient(circle, rgba(255,255,255,0.08), transparent 70%);
+  }
+  .proof-grid{display:grid;grid-template-columns:1.2fr 1fr;gap:50px;align-items:center;position:relative;}
+  .quote{font-family:'Fraunces';font-weight:400;font-size:clamp(22px,2.4vw,28px);line-height:1.4;}
+  .quote .accent{font-style:italic;color:#B7E3D8;}
+  .attr{margin-top:20px;color:#B7E3D8;font-size:13.5px;}
+  .stars{color:#F2C94C;font-size:16px;margin-bottom:16px;}
+  .proof-stat{border-left:1px solid rgba(255,255,255,0.2);padding-left:40px;}
+  .proof-stat .big{font-family:'Fraunces';font-size:56px;line-height:1;}
+  .proof-stat .cap{color:#B7E3D8;font-size:14px;margin-top:8px;}
+
+  /* CTA */
+  section.ctaband{padding:20px 0 100px;text-align:center;}
+  section.ctaband h2{font-size:clamp(30px,4.6vw,46px);color:var(--teal-deep);font-weight:500;}
+  section.ctaband p{color:var(--ink-soft);max-width:460px;margin:16px auto 32px;font-size:16px;line-height:1.6;}
+
+  footer{border-top:1px solid var(--line);padding:44px 0;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;}
+  .foot-links{display:flex;gap:26px;list-style:none;padding:0;margin:0;color:var(--ink-soft);font-size:13.5px;}
+  .fine{color:var(--ink-soft);opacity:.7;font-size:12px;margin-top:22px;}
+
+  @media(max-width:860px){
+    nav.top ul{display:none;}
+    .hero-grid{grid-template-columns:1fr;}
+    .stats-body{flex-direction:column;}
+    .stat{border-right:none;border-bottom:1px solid var(--line);}
+    .stat:last-child{border-bottom:none;}
+    .cards{grid-template-columns:1fr;}
+    .proof-grid{grid-template-columns:1fr;}
+    .proof-stat{border-left:none;padding-left:0;border-top:1px solid rgba(255,255,255,0.2);padding-top:24px;}
+    .proof-panel{padding:36px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .fog,.squeegee{animation:none;clip-path:inset(0 60% 0 0);left:40%;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand"><span class="gem">◆</span> Crystal Clear Cleaning</div>
+    <ul>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#proof">Reviews</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+    <a class="btn" href="#contact">Book a Free Quote</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Windsor · Chatham · Amherstburg · Leamington</div>
+      <h1>Windsor's <span class="accent">spotless</span><br>standard, home<br>by home.</h1>
+      <p class="lede">A perfect 5.0★ from 91 reviews — deep cleans, move-outs, and recurring visits handled with the kind of care that makes people mention us by name.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Book a Free Quote</a>
+        <span class="stars-inline">★★★★★ &nbsp;5.0 from 91 reviews</span>
+      </div>
+
+      <div class="stats">
+        <div class="stats-body">
+          <div class="stat"><div class="num">5.0★</div><div class="lab">Google rating</div></div>
+          <div class="stat"><div class="num">91</div><div class="lab">Verified reviews</div></div>
+          <div class="stat"><div class="num">4</div><div class="lab">Cities served, Essex County</div></div>
+        </div>
+      </div>
+    </div>
+
+    <div class="glasspane">
+      <div class="droplets">
+        <span style="width:10px;height:10px;top:18%;left:22%;"></span>
+        <span style="width:6px;height:6px;top:32%;left:60%;"></span>
+        <span style="width:14px;height:14px;top:55%;left:35%;"></span>
+        <span style="width:8px;height:8px;top:70%;left:70%;"></span>
+        <span style="width:5px;height:5px;top:22%;left:80%;"></span>
+      </div>
+      <div class="fog"></div>
+      <div class="squeegee"></div>
+      <div class="pane-badge">
+        <span>Every visit, the same result:</span>
+        <span class="big">crystal clear</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="services" id="services">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">What we handle</span>
+      <h2>Cleaning built around how you actually live.</h2>
+    </div>
+    <div class="cards">
+      <div class="card">
+        <div class="ico">✦</div>
+        <h3>Deep Cleaning</h3>
+        <p>Top-to-bottom attention for kitchens, bathrooms, and everything that gets overlooked in a normal week.</p>
+      </div>
+      <div class="card">
+        <div class="ico">⌂</div>
+        <h3>Move-In / Move-Out</h3>
+        <p>A fully reset space for the next chapter — landlords and new owners notice the difference immediately.</p>
+      </div>
+      <div class="card">
+        <div class="ico">↻</div>
+        <h3>Recurring Maintenance</h3>
+        <p>Weekly or biweekly visits that keep your home at that just-cleaned feeling, all year round.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div class="proof-panel">
+      <div class="proof-grid">
+        <div>
+          <div class="stars">★★★★★</div>
+          <p class="quote">Customers keep describing the same thing — a team that <span class="accent">takes on the toughest jobs</span> without cutting a single corner, and communicates clearly the whole way through.</p>
+          <div class="attr">— paraphrased from verified Google reviews, Windsor &amp; Essex County</div>
+        </div>
+        <div class="proof-stat">
+          <div class="big">5.0</div>
+          <div class="cap">average rating across 91 Google reviews</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="ctaband" id="contact">
+  <div class="wrap">
+    <span class="kicker">Ready for a spotless space?</span>
+    <h2>Get your free, no-obligation quote.</h2>
+    <p>Tell us the space and the visit type — we'll size the job and get back to you the same day.</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a class="btn" href="mailto:crystalclearcleaningservices24@gmail.com">Email Us for a Quote</a>
+      <a class="btn ghost" href="#services">See Our Services</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="brand">◆ Crystal Clear Cleaning</div>
+    <ul class="foot-links">
+      <li>Windsor, ON</li>
+      <li>crystalclearcleaningservices24@gmail.com</li>
+    </ul>
+  </div>
+  <div class="wrap fine">Design mockup prepared by George Athanasatos — not a live website.</div>
+</footer>
+
+</body>
+</html>
