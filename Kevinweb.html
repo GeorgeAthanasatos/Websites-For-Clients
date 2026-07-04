@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>KRL Tree Service — Calgary's Tree Whisperer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,500;0,600;1,400&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --parchment:#EFE9D8;
+    --parchment-deep:#E3DBC4;
+    --bark:#2E2118;
+    --bark-mid:#5B4432;
+    --moss:#576B49;
+    --moss-deep:#3C4A32;
+    --rust:#A6592E;
+    --ink:#2A2420;
+    --line:#D8CDAE;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    margin:0;background:var(--parchment);color:var(--ink);
+    font-family:'Spectral', serif;
+    -webkit-font-smoothing:antialiased;
+  }
+  h1,h2,h3{font-family:'Spectral';font-weight:500;margin:0;}
+  .mono{font-family:'IBM Plex Mono', monospace;}
+  a{color:inherit;text-decoration:none;}
+  .wrap{max-width:1100px;margin:0 auto;padding:0 28px;}
+
+  nav.top{position:sticky;top:0;z-index:50;background:rgba(239,233,216,0.9);backdrop-filter:blur(6px);border-bottom:1px solid var(--line);}
+  nav.top .wrap{display:flex;align-items:center;justify-content:space-between;height:78px;}
+  .brand{display:flex;align-items:center;gap:12px;font-size:19px;font-weight:600;color:var(--bark);}
+  .ring-mark{width:26px;height:26px;flex:none;}
+  nav.top ul{list-style:none;display:flex;gap:32px;margin:0;padding:0;font-size:15px;color:var(--bark-mid);}
+  nav.top ul a:hover{color:var(--bark);}
+  .btn{
+    display:inline-flex;align-items:center;gap:8px;
+    background:var(--moss);color:var(--parchment);font-family:'IBM Plex Mono';font-weight:500;font-size:13.5px;
+    padding:12px 22px;border-radius:2px;letter-spacing:0.02em;
+    transition:transform .15s ease, background .15s ease;
+  }
+  .btn:hover{background:var(--moss-deep);transform:translateY(-1px);}
+  .btn.ghost{background:transparent;color:var(--bark);border:1px solid var(--bark-mid);}
+
+  /* HERO */
+  .hero{padding:80px 0 60px;border-bottom:1px solid var(--line);}
+  .hero-grid{display:grid;grid-template-columns:1.15fr 0.85fr;gap:60px;align-items:center;}
+  .eyebrow{font-family:'IBM Plex Mono';font-size:12px;letter-spacing:0.12em;text-transform:uppercase;color:var(--rust);margin-bottom:18px;display:flex;align-items:center;gap:10px;}
+  .eyebrow::before{content:"§";font-size:14px;}
+  .hero h1{font-size:clamp(34px,4.6vw,52px);line-height:1.12;color:var(--bark);letter-spacing:-0.01em;}
+  .hero h1 em{font-style:italic;color:var(--moss);}
+  .hero p.lede{font-size:17.5px;line-height:1.75;color:var(--bark-mid);max-width:480px;margin:24px 0 30px;font-family:'Spectral';}
+  .cta-row{display:flex;gap:16px;align-items:center;flex-wrap:wrap;}
+  .cta-row .note{font-family:'IBM Plex Mono';font-size:12.5px;color:var(--bark-mid);}
+
+  /* SIGNATURE: tree rings */
+  .rings-wrap{display:flex;flex-direction:column;align-items:center;}
+  .rings-svg{width:100%;max-width:340px;}
+  .ring-caption{font-family:'IBM Plex Mono';font-size:12px;color:var(--bark-mid);text-align:center;margin-top:14px;line-height:1.7;}
+  .ring-caption b{color:var(--rust);}
+
+  /* STAT STRIP */
+  .stats{border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin-top:58px;}
+  .stats .wrap{display:flex;padding:0;}
+  .stat{flex:1;padding:22px 24px;border-right:1px solid var(--line);}
+  .stat:last-child{border-right:none;}
+  .stat .num{font-family:'IBM Plex Mono';font-size:26px;color:var(--bark);font-weight:500;}
+  .stat .lab{font-family:'IBM Plex Mono';font-size:11.5px;color:var(--bark-mid);margin-top:4px;text-transform:uppercase;letter-spacing:0.04em;}
+
+  /* PROCESS */
+  section.process{padding:96px 0;border-bottom:1px solid var(--line);}
+  .section-head{max-width:600px;margin-bottom:52px;}
+  .kicker{font-family:'IBM Plex Mono';color:var(--rust);font-size:12px;letter-spacing:0.12em;text-transform:uppercase;}
+  .section-head h2{font-size:clamp(28px,3.6vw,38px);margin-top:12px;color:var(--bark);}
+  .steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  .step{background:var(--parchment);padding:32px 26px;}
+  .step .tag{font-family:'IBM Plex Mono';font-size:12px;color:var(--rust);letter-spacing:0.06em;}
+  .step h3{font-size:22px;margin:14px 0 10px;color:var(--bark);}
+  .step p{font-size:15px;line-height:1.7;color:var(--bark-mid);margin:0;}
+
+  /* ABOUT */
+  section.about{padding:96px 0;border-bottom:1px solid var(--line);}
+  .about-grid{display:grid;grid-template-columns:0.9fr 1.1fr;gap:56px;align-items:start;}
+  .portrait{
+    aspect-ratio:3/4;border-radius:4px;
+    background:
+      repeating-linear-gradient(0deg, var(--bark-mid) 0px, var(--bark-mid) 1px, transparent 1px, transparent 40px),
+      linear-gradient(160deg, var(--moss) 0%, var(--moss-deep) 100%);
+    display:flex;align-items:flex-end;padding:22px;
+  }
+  .portrait span{font-family:'IBM Plex Mono';color:var(--parchment);font-size:12px;line-height:1.6;opacity:.85;}
+  .about h2{font-size:clamp(26px,3.2vw,34px);color:var(--bark);margin-bottom:18px;}
+  .about p{font-size:16.5px;line-height:1.8;color:var(--bark-mid);margin:0 0 16px;}
+  .about p:last-child{margin-bottom:0;}
+  .pullquote{font-style:italic;color:var(--bark);border-left:3px solid var(--rust);padding-left:18px;margin:22px 0;font-size:18px;line-height:1.6;}
+
+  /* PROOF */
+  section.proof{padding:0 0 96px;}
+  .proof-panel{background:var(--bark);border-radius:6px;padding:56px;color:var(--parchment);}
+  .stars{color:var(--rust);font-size:15px;margin-bottom:16px;letter-spacing:2px;}
+  .quote{font-size:clamp(20px,2.2vw,26px);line-height:1.5;font-style:italic;}
+  .quote .accent{color:#C98C5F;}
+  .attr{margin-top:18px;font-family:'IBM Plex Mono';font-size:12.5px;color:#B9AC8E;}
+
+  /* CTA */
+  section.ctaband{padding:20px 0 96px;text-align:center;}
+  section.ctaband h2{font-size:clamp(28px,4.2vw,42px);color:var(--bark);}
+  section.ctaband p{color:var(--bark-mid);max-width:460px;margin:16px auto 30px;font-size:16px;line-height:1.7;}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;}
+  .foot-grid{display:flex;justify-content:space-between;flex-wrap:wrap;gap:20px;align-items:center;}
+  .foot-links{display:flex;gap:26px;list-style:none;padding:0;margin:0;color:var(--bark-mid);font-family:'IBM Plex Mono';font-size:12.5px;}
+  .fine{color:var(--bark-mid);opacity:.7;font-family:'IBM Plex Mono';font-size:11.5px;margin-top:20px;}
+
+  @media(max-width:860px){
+    nav.top ul{display:none;}
+    .hero-grid, .about-grid{grid-template-columns:1fr;}
+    .stats .wrap{flex-direction:column;padding:0;}
+    .stat{border-right:none;border-bottom:1px solid var(--line);}
+    .stat:last-child{border-bottom:none;}
+    .steps{grid-template-columns:1fr;}
+    .proof-panel{padding:32px;}
+  }
+  @media (prefers-reduced-motion: reduce){
+    .ring-anim{animation:none !important;stroke-dashoffset:0 !important;}
+  }
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="wrap">
+    <div class="brand">
+      <svg class="ring-mark" viewBox="0 0 40 40"><circle cx="20" cy="20" r="17" fill="none" stroke="#5B4432" stroke-width="1.4"/><circle cx="20" cy="20" r="12" fill="none" stroke="#576B49" stroke-width="1.4"/><circle cx="20" cy="20" r="7" fill="none" stroke="#A6592E" stroke-width="1.4"/><circle cx="20" cy="20" r="2.5" fill="#2E2118"/></svg>
+      KRL Tree Service
+    </div>
+    <ul>
+      <li><a href="#process">Consulting</a></li>
+      <li><a href="#about">About Kevin</a></li>
+      <li><a href="#proof">Reviews</a></li>
+    </ul>
+    <a class="btn" href="#contact">Book a Consultation</a>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="eyebrow">Calgary Arborist, Since 1985</div>
+      <h1>Forty years of<br>listening to what<br><em>your trees</em> are<br>trying to tell you.</h1>
+      <p class="lede">One-on-one tree health consulting from Kevin Lee — known around Calgary as the Tree Whisperer, author of <em>Your Trees: What They Want You to Know</em>, and the person you call before you cut anything down.</p>
+      <div class="cta-row">
+        <a class="btn" href="#contact">Book a Consultation</a>
+        <span class="note">$300 min. · sessions always run long</span>
+      </div>
+    </div>
+
+    <div class="rings-wrap">
+      <svg class="rings-svg" viewBox="0 0 320 320">
+        <circle cx="160" cy="160" r="150" fill="none" stroke="#D8CDAE" stroke-width="1"/>
+        <circle class="ring-anim" cx="160" cy="160" r="130" fill="none" stroke="#5B4432" stroke-width="1.3" stroke-dasharray="817" stroke-dashoffset="817" style="animation:draw 1.8s ease-out forwards;"/>
+        <circle class="ring-anim" cx="160" cy="160" r="104" fill="none" stroke="#576B49" stroke-width="1.3" stroke-dasharray="653" stroke-dashoffset="653" style="animation:draw 1.8s ease-out .2s forwards;"/>
+        <circle class="ring-anim" cx="160" cy="160" r="78" fill="none" stroke="#5B4432" stroke-width="1.3" stroke-dasharray="490" stroke-dashoffset="490" style="animation:draw 1.8s ease-out .4s forwards;"/>
+        <circle class="ring-anim" cx="160" cy="160" r="52" fill="none" stroke="#A6592E" stroke-width="1.5" stroke-dasharray="327" stroke-dashoffset="327" style="animation:draw 1.8s ease-out .6s forwards;"/>
+        <circle cx="160" cy="160" r="10" fill="#2E2118"/>
+        <text x="160" y="164" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#EFE9D8">'85</text>
+        <text x="160" y="112" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5B4432">'95</text>
+        <text x="160" y="86" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#576B49">'11 · book published</text>
+        <text x="160" y="34" text-anchor="middle" font-family="IBM Plex Mono" font-size="10" fill="#5B4432">2025</text>
+      </svg>
+      <div class="ring-caption">Each ring, a decade in Calgary's yards.<br><b>190 essays</b> written along the way, free to read.</div>
+    </div>
+  </div>
+
+  <div class="stats">
+    <div class="wrap">
+      <div class="stat"><div class="num">5.0★</div><div class="lab">Google rating</div></div>
+      <div class="stat"><div class="num">175</div><div class="lab">Verified reviews</div></div>
+      <div class="stat"><div class="num">40 yrs</div><div class="lab">Working Calgary's trees</div></div>
+      <div class="stat"><div class="num">190</div><div class="lab">Free essays published</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="process" id="process">
+  <div class="wrap">
+    <div class="section-head">
+      <span class="kicker">How a visit works</span>
+      <h2>Not a quote over the phone. A real look at your tree.</h2>
+    </div>
+    <div class="steps">
+      <div class="step">
+        <div class="tag">THE CALL</div>
+        <h3>You describe the problem</h3>
+        <p>Kevin listens first — what you're seeing, what's changed, what other people have already told you. No van shows up before this conversation happens.</p>
+      </div>
+      <div class="step">
+        <div class="tag">THE VISIT</div>
+        <h3>An hour, minimum</h3>
+        <p>On-site, hands in the soil if needed. Sessions regularly run long — often turning into an impromptu pruning class.</p>
+      </div>
+      <div class="step">
+        <div class="tag">THE PLAN</div>
+        <h3>What to actually do next</h3>
+        <p>A clear, honest answer — even when that answer is "leave it alone." Decades of pattern-matching, applied to your specific yard.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="about" id="about">
+  <div class="wrap about-grid">
+    <div class="portrait">
+      <span>Kevin Lee — arborist since the 1980s.<br>Author, "Your Trees: What They Want You to Know"</span>
+    </div>
+    <div>
+      <span class="kicker">About Kevin</span>
+      <h2 style="margin-top:12px;">A Calgarian since grade two, and a tree person for longer than that.</h2>
+      <p>Kevin grew up exploring the Rocky Mountain front and spending summers on a mixed farm in central Saskatchewan — planted by his great-grandfather in 1928, still holding a grove of Scots pine.</p>
+      <p class="pullquote">"Disturb the roots, look for die-back above. It's one whole tree in balance — not five separate parts."</p>
+      <p>That principle now guides every consultation: no upselling, no guessing — just decades of hands-on pattern recognition applied to your yard's actual problem.</p>
+    </div>
+  </div>
+</section>
+
+<section class="proof" id="proof">
+  <div class="wrap">
+    <div class="proof-panel">
+      <div class="stars">★★★★★</div>
+      <p class="quote">Clients keep describing the same moment — <span class="accent">watching Kevin dig a foot down</span> to find the real problem everyone else had missed.</p>
+      <div class="attr">— paraphrased from verified Google reviews, Calgary</div>
+    </div>
+  </div>
+</section>
+
+<section class="ctaband" id="contact">
+  <div class="wrap">
+    <span class="kicker">Worried about a tree?</span>
+    <h2>Book a consultation before you cut anything down.</h2>
+    <p>Tell Kevin what you're seeing. He'll tell you honestly what's actually going on — and what, if anything, needs to happen next.</p>
+    <div class="cta-row" style="justify-content:center;">
+      <a class="btn" href="mailto:kevinintrees@gmail.com">Email kevinintrees@gmail.com</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap foot-grid">
+    <div class="brand" style="font-size:16px;">
+      <svg class="ring-mark" viewBox="0 0 40 40" width="20" height="20"><circle cx="20" cy="20" r="17" fill="none" stroke="#5B4432" stroke-width="1.4"/><circle cx="20" cy="20" r="12" fill="none" stroke="#576B49" stroke-width="1.4"/><circle cx="20" cy="20" r="7" fill="none" stroke="#A6592E" stroke-width="1.4"/></svg>
+      KRL Tree Service
+    </div>
+    <ul class="foot-links">
+      <li>Calgary, AB (NW / SW)</li>
+      <li>kevinintrees@gmail.com</li>
+    </ul>
+  </div>
+  <div class="wrap fine">Design mockup prepared by George Athanasatos — not a live website.</div>
+</footer>
+
+<style>
+  @keyframes draw{to{stroke-dashoffset:0;}}
+</style>
+
+</body>
+</html>
